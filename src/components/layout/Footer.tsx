@@ -20,7 +20,7 @@ function InstagramIcon({ size = 15 }: { size?: number }) {
     </svg>
   );
 }
-function FacebookIcon({ size = 15 }: { size?: number }) {
+function LinkedinIcon({ size = 15 }: { size?: number }) {
   return (
     <svg
       width={size}
@@ -32,7 +32,9 @@ function FacebookIcon({ size = 15 }: { size?: number }) {
       strokeLinecap="round"
       strokeLinejoin="round"
     >
-      <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+      <rect x="2" y="9" width="4" height="12" />
+      <circle cx="4" cy="4" r="2" />
     </svg>
   );
 }
@@ -53,6 +55,32 @@ function YoutubeIcon({ size = 15 }: { size?: number }) {
     </svg>
   );
 }
+function XIcon({ size = 15 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+    </svg>
+  );
+}
+function GlobeIcon({ size = 15 }: { size?: number }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <circle cx="12" cy="12" r="10" />
+      <line x1="2" y1="12" x2="22" y2="12" />
+      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+    </svg>
+  );
+}
+
 import { openingHours } from '@/lib/data';
 
 const footerLinks = {
@@ -84,6 +112,30 @@ const footerLinks = {
   ],
 };
 
+const socialLinks = [
+  {
+    icon: InstagramIcon,
+    label: 'Instagram',
+    href: 'https://www.instagram.com/hakim.color/',
+  },
+  {
+    icon: LinkedinIcon,
+    label: 'LinkedIn',
+    href: 'https://www.linkedin.com/in/hakimcolor/',
+  },
+  {
+    icon: YoutubeIcon,
+    label: 'YouTube',
+    href: 'https://www.youtube.com/@hakimcolor',
+  },
+  { icon: XIcon, label: 'X (Twitter)', href: 'https://x.com/hakimcolor' },
+  {
+    icon: GlobeIcon,
+    label: 'Portfolio',
+    href: 'https://hakimcolorportfolio.vercel.app/',
+  },
+];
+
 export function Footer() {
   return (
     <footer className="bg-[#243C32] text-[#E8DCCB]">
@@ -106,15 +158,13 @@ export function Footer() {
               skin's unique story.
             </p>
             {/* Social */}
-            <div className="flex items-center gap-4">
-              {[
-                { icon: InstagramIcon, label: 'Instagram', href: '#' },
-                { icon: FacebookIcon, label: 'Facebook', href: '#' },
-                { icon: YoutubeIcon, label: 'YouTube', href: '#' },
-              ].map(({ icon: Icon, label, href }) => (
+            <div className="flex items-center gap-3 flex-wrap">
+              {socialLinks.map(({ icon: Icon, label, href }) => (
                 <a
                   key={label}
                   href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label={label}
                   className="w-9 h-9 border border-[#A9B7A4]/30 flex items-center justify-center text-[#A9B7A4] hover:border-[#B69A65] hover:text-[#B69A65] transition-colors duration-200"
                 >
@@ -157,25 +207,25 @@ export function Footer() {
               <li className="flex items-start gap-3">
                 <MapPin size={15} className="text-[#B69A65] mt-0.5 shrink-0" />
                 <span className="text-sm font-body text-[#A9B7A4]">
-                  12 Beaumont Street, Mayfair, London W1G 6PE
+                  Jashore, Dhaka, Bangladesh
                 </span>
               </li>
               <li className="flex items-center gap-3">
                 <Phone size={15} className="text-[#B69A65] shrink-0" />
                 <a
-                  href="tel:+442079460958"
+                  href="tel:+8801818777856"
                   className="text-sm font-body text-[#A9B7A4] hover:text-[#E8DCCB] transition-colors"
                 >
-                  +44 20 7946 0958
+                  +8801818777856
                 </a>
               </li>
               <li className="flex items-center gap-3">
                 <Mail size={15} className="text-[#B69A65] shrink-0" />
                 <a
-                  href="mailto:hello@lumierespa.com"
+                  href="mailto:hakimcolor777@gmail.com"
                   className="text-sm font-body text-[#A9B7A4] hover:text-[#E8DCCB] transition-colors"
                 >
-                  hello@lumierespa.com
+                  hakimcolor777@gmail.com
                 </a>
               </li>
             </ul>
@@ -208,7 +258,7 @@ export function Footer() {
           <p className="text-xs font-body text-[#A9B7A4]">
             © 2026 Lumière Spa & Skincare. All rights reserved.
           </p>
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-4 flex-wrap">
             <Link
               href="/privacy"
               className="text-xs font-body text-[#A9B7A4] hover:text-[#E8DCCB] transition-colors"
@@ -221,6 +271,16 @@ export function Footer() {
             >
               Terms & Conditions
             </Link>
+            <span className="text-[#A9B7A4]/30">|</span>
+            <a
+              href="https://hakimcolorportfolio.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs font-body text-[#A9B7A4] hover:text-[#B69A65] transition-colors flex items-center gap-1.5"
+            >
+              <GlobeIcon size={12} />
+              Developed by Hakim Color
+            </a>
           </div>
         </div>
       </div>
