@@ -121,42 +121,74 @@ export default function AboutPage() {
       {/* Specialists */}
       <section className="bg-[#F8F5EF] py-24">
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
-          <div className="mb-12 flex flex-col lg:flex-row lg:items-end justify-between gap-6">
-            <div>
-              <SectionLabel>The Team</SectionLabel>
-              <h2 className="font-heading font-light text-[#243C32] text-4xl lg:text-5xl leading-tight">
-                Meet our{' '}
-                <span className="italic text-[#B69A65]">specialists.</span>
-              </h2>
+          <RevealOnScroll>
+            <div className="mb-12 flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+              <div>
+                <SectionLabel>The Team</SectionLabel>
+                <h2 className="font-heading font-light text-[#243C32] text-4xl lg:text-5xl leading-tight">
+                  Meet our{' '}
+                  <span className="italic text-[#B69A65]">specialists.</span>
+                </h2>
+              </div>
+              <Link
+                href="/specialists"
+                className="inline-flex items-center gap-2 text-sm font-body font-medium text-[#243C32] hover:text-[#B69A65] transition-colors group shrink-0"
+              >
+                View all specialists{' '}
+                <ArrowRight
+                  size={14}
+                  className="group-hover:translate-x-1 transition-transform"
+                />
+              </Link>
             </div>
-            <Link
-              href="/specialists"
-              className="inline-flex items-center gap-2 text-sm font-body font-medium text-[#243C32] hover:text-[#B69A65] transition-colors group shrink-0"
-            >
-              View all specialists{' '}
-              <ArrowRight
-                size={14}
-                className="group-hover:translate-x-1 transition-transform"
-              />
-            </Link>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          </RevealOnScroll>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {specialists.map((s, i) => (
-              <RevealOnScroll key={s.id} delay={i * 100} y={40}>
-                <Link href={`/specialists/${s.slug}`} className="group block">
-                  <div className="aspect-[3/4] overflow-hidden mb-4">
+              <RevealOnScroll key={s.id} delay={i * 120} y={50}>
+                <Link
+                  href={`/specialists/${s.slug}`}
+                  className="group block bg-white border border-[#E8DCCB] overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-500"
+                >
+                  {/* Image */}
+                  <div className="aspect-[3/4] overflow-hidden relative">
                     <img
                       src={s.image}
                       alt={s.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
                     />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#243C32]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400" />
+                    {/* Hover overlay */}
+                    <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-400 translate-y-4 group-hover:translate-y-0">
+                      <span className="inline-flex items-center gap-1.5 text-xs font-body text-[#B69A65] bg-[#243C32]/80 px-3 py-1.5 backdrop-blur-sm">
+                        View Profile →
+                      </span>
+                    </div>
                   </div>
-                  <h3 className="font-heading text-xl text-[#243C32] font-light group-hover:text-[#B69A65] transition-colors">
-                    {s.name}
-                  </h3>
-                  <p className="text-xs font-body text-[#A9B7A4] tracking-wide mt-0.5">
-                    {s.designation}
-                  </p>
+                  {/* Info */}
+                  <div className="p-5">
+                    <h3 className="font-heading text-xl text-[#243C32] font-light group-hover:text-[#B69A65] transition-colors mb-0.5">
+                      {s.name}
+                    </h3>
+                    <p className="text-xs font-body text-[#B69A65] tracking-wide font-medium mb-3">
+                      {s.designation}
+                    </p>
+                    <div className="flex items-center gap-3 mb-3 text-xs font-body text-[#A9B7A4]">
+                      <span>{s.experience}+ years</span>
+                      <span className="w-1 h-1 rounded-full bg-[#E8DCCB]" />
+                      <span>{s.expertise[0]}</span>
+                    </div>
+                    <div className="flex flex-wrap gap-1.5">
+                      {s.expertise.slice(0, 2).map((e) => (
+                        <span
+                          key={e}
+                          className="text-[10px] font-body font-medium bg-[#E8DCCB]/60 text-[#243C32] px-2 py-0.5 tracking-wide"
+                        >
+                          {e}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
                 </Link>
               </RevealOnScroll>
             ))}
