@@ -1,13 +1,15 @@
-import type { Metadata } from "next";
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
-import { specialists } from "@/lib/data";
-import { SectionLabel } from "@/components/ui/SectionLabel";
-import { Button } from "@/components/ui/Button";
+import type { Metadata } from 'next';
+import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
+import { specialists } from '@/lib/data';
+import { SectionLabel } from '@/components/ui/SectionLabel';
+import { RevealOnScroll } from '@/components/animations/RevealOnScroll';
+import { Button } from '@/components/ui/Button';
 
 export const metadata: Metadata = {
-  title: "About Us",
-  description: "Learn the story behind Lumière Spa — our philosophy, our specialists, and our commitment to luxury skincare.",
+  title: 'About Us',
+  description:
+    'Learn the story behind Lumière Spa — our philosophy, our specialists, and our commitment to luxury skincare.',
 };
 
 export default function AboutPage() {
@@ -39,13 +41,24 @@ export default function AboutPage() {
                 Founded on a belief that great skin is everyone's right.
               </h2>
               <p className="text-base font-body text-[#262622]/70 leading-relaxed mb-5">
-                Lumière was born from a simple, deeply held conviction: professional skincare should be accessible, evidence-based, and genuinely transformative. Our founders, Aria Chen and Sophie Laurent, opened Lumière's first studio in Mayfair in 2016 with a small team and an enormous ambition.
+                Lumière was born from a simple, deeply held conviction:
+                professional skincare should be accessible, evidence-based, and
+                genuinely transformative. Our founders, Aria Chen and Sophie
+                Laurent, opened Lumière's first studio in Mayfair in 2016 with a
+                small team and an enormous ambition.
               </p>
               <p className="text-base font-body text-[#262622]/70 leading-relaxed mb-5">
-                Over a decade, that ambition has evolved into one of London's most respected skincare studios. We have served over four thousand clients, performed countless thousands of treatments, and built a reputation based entirely on results and genuine care.
+                Over a decade, that ambition has evolved into one of London's
+                most respected skincare studios. We have served over four
+                thousand clients, performed countless thousands of treatments,
+                and built a reputation based entirely on results and genuine
+                care.
               </p>
               <p className="text-base font-body text-[#262622]/70 leading-relaxed">
-                What has not changed is our approach: take the time to understand each client's skin, design a treatment plan around their real needs, and deliver it with the precision and warmth that great skincare demands.
+                What has not changed is our approach: take the time to
+                understand each client's skin, design a treatment plan around
+                their real needs, and deliver it with the precision and warmth
+                that great skincare demands.
               </p>
             </div>
             <div className="grid grid-cols-2 gap-4">
@@ -74,26 +87,32 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
             {[
               {
-                label: "Our Mission",
-                title: "Elevate skin health through expertise.",
-                text: "To provide every client with a bespoke, evidence-based skincare experience that delivers visible, lasting results — in an environment of genuine luxury and care.",
+                label: 'Our Mission',
+                title: 'Elevate skin health through expertise.',
+                text: 'To provide every client with a bespoke, evidence-based skincare experience that delivers visible, lasting results — in an environment of genuine luxury and care.',
               },
               {
-                label: "Our Vision",
-                title: "Redefine what a spa can be.",
-                text: "We envision a world where professional skincare is not a periodic indulgence, but an integrated part of a healthy, beautiful life. Lumière is building that future, one treatment at a time.",
+                label: 'Our Vision',
+                title: 'Redefine what a spa can be.',
+                text: 'We envision a world where professional skincare is not a periodic indulgence, but an integrated part of a healthy, beautiful life. Lumière is building that future, one treatment at a time.',
               },
               {
-                label: "Our Values",
-                title: "Expertise, integrity, beauty.",
-                text: "We never compromise on ingredient quality, treatment efficacy, or client care. Our values guide every decision, from the brands we choose to the specialists we hire.",
+                label: 'Our Values',
+                title: 'Expertise, integrity, beauty.',
+                text: 'We never compromise on ingredient quality, treatment efficacy, or client care. Our values guide every decision, from the brands we choose to the specialists we hire.',
               },
-            ].map((item) => (
-              <div key={item.label} className="bg-white p-8">
-                <SectionLabel>{item.label}</SectionLabel>
-                <h3 className="font-heading text-2xl text-[#243C32] font-light mb-4">{item.title}</h3>
-                <p className="text-sm font-body text-[#262622]/65 leading-relaxed">{item.text}</p>
-              </div>
+            ].map((item, i) => (
+              <RevealOnScroll key={item.label} delay={i * 120} y={40}>
+                <div className="bg-white p-8 h-full hover:shadow-lg transition-shadow duration-300">
+                  <SectionLabel>{item.label}</SectionLabel>
+                  <h3 className="font-heading text-2xl text-[#243C32] font-light mb-4">
+                    {item.title}
+                  </h3>
+                  <p className="text-sm font-body text-[#262622]/65 leading-relaxed">
+                    {item.text}
+                  </p>
+                </div>
+              </RevealOnScroll>
             ))}
           </div>
         </div>
@@ -106,31 +125,40 @@ export default function AboutPage() {
             <div>
               <SectionLabel>The Team</SectionLabel>
               <h2 className="font-heading font-light text-[#243C32] text-4xl lg:text-5xl leading-tight">
-                Meet our <span className="italic text-[#B69A65]">specialists.</span>
+                Meet our{' '}
+                <span className="italic text-[#B69A65]">specialists.</span>
               </h2>
             </div>
             <Link
               href="/specialists"
               className="inline-flex items-center gap-2 text-sm font-body font-medium text-[#243C32] hover:text-[#B69A65] transition-colors group shrink-0"
             >
-              View all specialists <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+              View all specialists{' '}
+              <ArrowRight
+                size={14}
+                className="group-hover:translate-x-1 transition-transform"
+              />
             </Link>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {specialists.map((s) => (
-              <Link key={s.id} href={`/specialists/${s.slug}`} className="group">
-                <div className="aspect-[3/4] overflow-hidden mb-4">
-                  <img
-                    src={s.image}
-                    alt={s.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                  />
-                </div>
-                <h3 className="font-heading text-xl text-[#243C32] font-light group-hover:text-[#B69A65] transition-colors">
-                  {s.name}
-                </h3>
-                <p className="text-xs font-body text-[#A9B7A4] tracking-wide mt-0.5">{s.designation}</p>
-              </Link>
+            {specialists.map((s, i) => (
+              <RevealOnScroll key={s.id} delay={i * 100} y={40}>
+                <Link href={`/specialists/${s.slug}`} className="group block">
+                  <div className="aspect-[3/4] overflow-hidden mb-4">
+                    <img
+                      src={s.image}
+                      alt={s.name}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                  </div>
+                  <h3 className="font-heading text-xl text-[#243C32] font-light group-hover:text-[#B69A65] transition-colors">
+                    {s.name}
+                  </h3>
+                  <p className="text-xs font-body text-[#A9B7A4] tracking-wide mt-0.5">
+                    {s.designation}
+                  </p>
+                </Link>
+              </RevealOnScroll>
             ))}
           </div>
         </div>
@@ -140,10 +168,12 @@ export default function AboutPage() {
       <section className="bg-[#243C32] py-20">
         <div className="max-w-2xl mx-auto px-6 text-center">
           <h2 className="font-heading font-light text-[#F8F5EF] text-4xl mb-5">
-            Ready to begin your <span className="italic text-[#B69A65]">skin journey?</span>
+            Ready to begin your{' '}
+            <span className="italic text-[#B69A65]">skin journey?</span>
           </h2>
           <p className="text-sm font-body text-[#A9B7A4] mb-8 leading-relaxed">
-            Book a complimentary skin consultation with one of our specialists and discover the treatment plan that is right for you.
+            Book a complimentary skin consultation with one of our specialists
+            and discover the treatment plan that is right for you.
           </p>
           <Button href="/book" variant="gold" size="lg">
             Book Your Consultation

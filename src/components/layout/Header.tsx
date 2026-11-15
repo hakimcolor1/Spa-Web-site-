@@ -1,26 +1,26 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
-import { Menu, X, ChevronDown } from "lucide-react";
-import { Button } from "@/components/ui/Button";
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { useState, useEffect } from 'react';
+import { Menu, X, ChevronDown } from 'lucide-react';
+import { Button } from '@/components/ui/Button';
 
 const navLinks = [
-  { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
+  { label: 'Home', href: '/' },
+  { label: 'About', href: '/about' },
   {
-    label: "Treatments",
-    href: "/treatments",
+    label: 'Treatments',
+    href: '/treatments',
     children: [
-      { label: "All Treatments", href: "/treatments" },
-      { label: "Facial & Skincare", href: "/facial-skincare" },
-      { label: "Our Specialists", href: "/specialists" },
+      { label: 'All Treatments', href: '/treatments' },
+      { label: 'Facial & Skincare', href: '/facial-skincare' },
+      { label: 'Our Specialists', href: '/specialists' },
     ],
   },
-  { label: "Membership", href: "/membership" },
-  { label: "Blog", href: "/blog" },
-  { label: "Contact", href: "/contact" },
+  { label: 'Membership', href: '/membership' },
+  { label: 'Blog', href: '/blog' },
+  { label: 'Contact', href: '/contact' },
 ];
 
 export function Header() {
@@ -31,8 +31,8 @@ export function Header() {
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   useEffect(() => {
@@ -40,27 +40,31 @@ export function Header() {
   }, [pathname]);
 
   const isActive = (href: string) =>
-    href === "/" ? pathname === "/" : pathname.startsWith(href);
+    href === '/' ? pathname === '/' : pathname.startsWith(href);
 
   return (
     <>
       {/* Announcement bar */}
-      <div className="bg-[#243C32] text-[#E8DCCB] text-center py-2 px-4">
-        <p className="text-xs font-body tracking-widest uppercase">
-          Complimentary skin consultation with every first visit &nbsp;·&nbsp; Book now
+      <div className="bg-[#243C32] text-[#E8DCCB] text-center py-2 px-4 overflow-hidden">
+        <p className="text-xs font-body tracking-widest uppercase animate-[fadeIn_1s_ease-out]">
+          Complimentary skin consultation with every first visit &nbsp;·&nbsp;
+          Book now
         </p>
       </div>
 
       <header
         className={`sticky top-0 z-50 w-full transition-all duration-500 ${
           scrolled
-            ? "bg-[#F8F5EF]/95 backdrop-blur-md shadow-[0_1px_0_0_#E8DCCB]"
-            : "bg-[#F8F5EF]"
+            ? 'bg-[#F8F5EF]/95 backdrop-blur-md shadow-[0_1px_0_0_#E8DCCB] py-2'
+            : 'bg-[#F8F5EF] py-4'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between h-18 py-4">
+        <div className="max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between h-14 lg:h-16 transition-all duration-300">
           {/* Logo */}
-          <Link href="/" className="flex flex-col items-start group">
+          <Link
+            href="/"
+            className="flex flex-col items-start group cursor-pointer"
+          >
             <span className="font-heading text-2xl font-light tracking-[0.12em] text-[#243C32] group-hover:text-[#B69A65] transition-colors duration-300">
               Lumière
             </span>
@@ -79,21 +83,28 @@ export function Header() {
                   onMouseEnter={() => setOpenDropdown(link.href)}
                   onMouseLeave={() => setOpenDropdown(null)}
                 >
-                  <button
-                    className={`flex items-center gap-1 text-sm font-body font-medium tracking-wide transition-colors duration-200 ${
-                      isActive(link.href) ? "text-[#B69A65]" : "text-[#262622] hover:text-[#243C32]"
-                    }`}
-                  >
-                    {link.label}
-                    <ChevronDown size={14} className="transition-transform group-hover:rotate-180 duration-200" />
+                  <button className="flex items-center gap-1 text-sm font-body font-medium tracking-wide transition-colors duration-200 cursor-pointer">
+                    <span
+                      className={
+                        isActive(link.href)
+                          ? 'text-[#B69A65]'
+                          : 'text-[#262622] hover:text-[#243C32]'
+                      }
+                    >
+                      {link.label}
+                    </span>
+                    <ChevronDown
+                      size={14}
+                      className="transition-transform group-hover:rotate-180 duration-200"
+                    />
                   </button>
                   {openDropdown === link.href && (
-                    <div className="absolute top-full left-0 mt-2 w-52 bg-[#F8F5EF] border border-[#E8DCCB] shadow-lg py-2">
+                    <div className="absolute top-full left-0 mt-2 w-52 bg-[#F8F5EF] border border-[#E8DCCB] shadow-lg py-2 animate-[fadeIn_0.2s_ease-out]">
                       {link.children.map((child) => (
                         <Link
                           key={child.href}
                           href={child.href}
-                          className="block px-5 py-2.5 text-sm font-body text-[#262622] hover:bg-[#E8DCCB] hover:text-[#243C32] transition-colors duration-150"
+                          className="block px-5 py-2.5 text-sm font-body text-[#262622] hover:bg-[#E8DCCB] hover:text-[#243C32] transition-colors duration-150 cursor-pointer"
                         >
                           {child.label}
                         </Link>
@@ -105,10 +116,10 @@ export function Header() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`text-sm font-body font-medium tracking-wide transition-colors duration-200 relative after:absolute after:bottom-0 after:left-0 after:h-px after:bg-[#B69A65] after:transition-all after:duration-300 ${
+                  className={`text-sm font-body font-medium tracking-wide transition-colors duration-200 relative after:absolute after:bottom-0 after:left-0 after:h-px after:bg-[#B69A65] after:transition-all after:duration-300 cursor-pointer ${
                     isActive(link.href)
-                      ? "text-[#B69A65] after:w-full"
-                      : "text-[#262622] hover:text-[#243C32] after:w-0 hover:after:w-full"
+                      ? 'text-[#B69A65] after:w-full'
+                      : 'text-[#262622] hover:text-[#243C32] after:w-0 hover:after:w-full'
                   }`}
                 >
                   {link.label}
@@ -123,7 +134,7 @@ export function Header() {
               Book Appointment
             </Button>
             <button
-              className="lg:hidden p-2 text-[#262622]"
+              className="lg:hidden p-2 text-[#262622] cursor-pointer"
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label="Toggle menu"
             >
@@ -134,13 +145,13 @@ export function Header() {
 
         {/* Mobile nav */}
         {mobileOpen && (
-          <div className="lg:hidden bg-[#F8F5EF] border-t border-[#E8DCCB] px-6 py-6 space-y-4">
+          <div className="lg:hidden bg-[#F8F5EF] border-t border-[#E8DCCB] px-6 py-6 space-y-4 animate-[fadeIn_0.3s_ease-out]">
             {navLinks.map((link) => (
               <div key={link.href}>
                 <Link
                   href={link.href}
-                  className={`block text-base font-body font-medium py-2 border-b border-[#E8DCCB] transition-colors ${
-                    isActive(link.href) ? "text-[#B69A65]" : "text-[#262622]"
+                  className={`block text-base font-body font-medium py-2 border-b border-[#E8DCCB] transition-colors cursor-pointer ${
+                    isActive(link.href) ? 'text-[#B69A65]' : 'text-[#262622]'
                   }`}
                 >
                   {link.label}
@@ -151,7 +162,7 @@ export function Header() {
                       <Link
                         key={child.href}
                         href={child.href}
-                        className="block text-sm font-body text-[#A9B7A4] py-1 hover:text-[#243C32] transition-colors"
+                        className="block text-sm font-body text-[#A9B7A4] py-1 hover:text-[#243C32] transition-colors cursor-pointer"
                       >
                         {child.label}
                       </Link>

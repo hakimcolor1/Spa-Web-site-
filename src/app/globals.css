@@ -29,6 +29,24 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Force cursor pointer on all buttons and interactive elements */
+button,
+a,
+[role='button'],
+input[type='submit'],
+input[type='button'],
+select,
+summary,
+label[for],
+.clickable {
+  cursor: pointer;
+}
+
+button:disabled,
+input:disabled {
+  cursor: not-allowed;
+}
+
 body {
   background: var(--color-ivory);
   color: var(--color-charcoal);
